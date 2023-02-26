@@ -1,6 +1,6 @@
 ---
-title: "rTWAS"
-author: "Duarte R.R.R."
+title: "Running a retrotranscriptome-wide association study (rTWAS)"
+author: "by Rodrigo R. R. Duarte"
 date: "2023-02-26"
 output: html_document
 ---
@@ -9,7 +9,42 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+## <b>1) Set up the environment</b>
+#### Set up the FUSION program folder
+`cd ~/scratch/programs/`<br>
+`wget https://github.com/gusevlab/fusion_twas/archive/master.zip -O fusion.zip`<br>
+`unzip fusion.zip`
+
+#### Create conda environment using the yml file provided
+`conda env create --file fusion_final_environment.yml`
+
+#### For KCL's HPC CREATE, you have to create shortcuts for plink2r libraries (otherwise installation in R next won't succeed) # see https://github.com/gusevlab/fusion_twas/issues/13#issuecomment-1202150944
+`cd ~/scratch/miniconda3/envs/fusion_final/lib`<br>
+`mv liblapack.so libRlapack.so`<br>
+`mv libblas.so libRblas.so`
+
+
+## <b>2) Download SNP weights and the referen panel</b>
+`wget ________________`<br>
+`wget ________________`<br>
+
+## <b>3) Preprocess GWAS summary statistics</b>
+Summary statistics should look like:
+
+```
+SNP     A1      A2      Z
+rs10    A       C       -0.501
+rs1000000       G       A       2.238
+rs10000003      A       G       -1.324
+rs10000010      T       C       -0.082
+rs10000013      C       A       -2.04
+```
+
+
+
+## Preprocess GWAS summary statistics
+
+
 
 This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
