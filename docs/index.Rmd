@@ -26,11 +26,14 @@ Set up FOCUS<br>
 `pip install rpy2 --user` <br>
 
 
-## <b>2) Download SNP weights for FOCUS/FUSION and the 1000 Genomes reference panel, and decompress files</b>
+## <b>2) Download the required files and decompress</b>
+These include the SNP weights for FOCUS/FUSION and the 1000 Genomes reference panel.
+<br>
 `wget ________________` # awaiting DOI from FigShare. <br> 
 `tar zxvf FOCUS_weights.tgz`<br>
 `tar zxvf FUSION_weights.tgz`<br>
 `tar zxvf 1000G_ref_panel.tgz`<br>
+<br>
 N.B.: Reference panel corresponds to the European subset of the 1,000 Genomes project annotated with dbsnp151/hg19.
 
 ## <b>3) Preprocessing GWAS summary statistics</b>
