@@ -1,6 +1,6 @@
 ---
 title: "Running a retrotranscriptome-wide association study (rTWAS)"
-author: "by Rodrigo R. R. Duarte"
+author: "by Rodrigo R. R. Duarte (rodrigo.duarte@kcl.ac.uk)"
 date: "2023-02-26"
 output: html_document
 ---
@@ -104,8 +104,11 @@ To run FOCUS, activate the conda environment, and use the FUSION weights and lin
 <br>
 <br>
 <br>
-#### Contact: Rodrigo Duarte (rodrigo.duarte@kcl.ac.uk)
 
+For interpretation of the output files, please use the instructions provided by the authors of [FOCUS](https://github.com/bogdanlab/focus) and [FUSION](http://gusevlab.org/projects/fusion/).
+<br>
+<br>
+<br>
 
 
 
