@@ -24,12 +24,17 @@ knitr::opts_chunk$set(echo = TRUE)
 `mv libblas.so libRblas.so`
 
 
-## <b>2) Download SNP weights and the referen panel</b>
+## <b>2) Download SNP weights for FOCUS/FUSION and the 1000 Genomes reference panel</b>
 `wget ________________`<br>
 `wget ________________`<br>
+`wget ________________`<br>
+N.B.: Reference panel corresponds to the European subset of the 1,000 Genomes project annotated with dbsnp151/hg19.
 
-## <b>3) Preprocess GWAS summary statistics</b>
-Summary statistics should look like:
+## <b>3) Preprocessing GWAS summary statistics</b>
+Your GWAS summary statistics must be annotated with variant IDs according to dbsnp151. Use munge_sumstats.py from the [ldsc](https://github.com/bulik/ldsc) package for pre-filtering. You can find an example of how this was done on the scripts available from https://github.com/rodrigoduarte88/TWAS_HERVs-SCZ. You can also check the [FUSION guidelines](http://gusevlab.org/projects/fusion/) for additional instructions.
+
+
+Summary statistics for FUSION should look like:
 
 ```
 SNP     A1      A2      Z
@@ -40,26 +45,35 @@ rs10000010      T       C       -0.082
 rs10000013      C       A       -2.04
 ```
 
+Summary statistics for FOCUS should look like:
 
-
-## Preprocess GWAS summary statistics
-
-
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+```
+CHR     SNP     BP      A1      A2      Z       N
+7       rs10    92383888        A       C       -0.501  58749.13
+12      rs1000000       126890980       G       A       2.238   58749.13
+4       rs10000003      57561647        A       G       -1.324  58749.13
+4       rs10000010      21618674        T       C       -0.082  58749.13
+4       rs10000013      37225069        C       A       -2.04   58749.13
 ```
 
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+## <b>4) Before running FUSION, switch on the conda environment, and proceed with the [FUSION analysis](http://gusevlab.org/projects/fusion/) as recommended by the authors</b>
+`conda activate fusion_final`
+<br>
+E.g.,:
+```
+Rscript FUSION.assoc_test.R \
+--sumstats PGC2.SCZ.sumstats \
+--weights ./WEIGHTS/GTEx.Whole_Blood.pos \
+--weights_dir ./WEIGHTS/ \
+--ref_ld_chr ./LDREF/1000G.EUR. \
+--chr 22 \
+--out PGC2.SCZ.22.dat
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+
+
+
+
+
+
