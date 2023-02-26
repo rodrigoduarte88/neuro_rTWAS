@@ -358,34 +358,29 @@ association study (rTWAS)</h1>
 </div>
 
 
-<div id="set-up-the-environment" class="section level2">
-<h2><b>1) Set up the environment</b></h2>
-<div id="set-up-the-fusion-program-folder" class="section level4">
-<h4>Set up the FUSION program folder</h4>
-<p><code>cd ~/scratch/programs/</code><br>
+<div id="set-up-fusion-and-focus" class="section level2">
+<h2><b>1) Set up FUSION and FOCUS</b></h2>
+<p>Set up the FUSION program folder <br>
+<code>cd ~/scratch/programs/</code><br>
 <code>wget https://github.com/gusevlab/fusion_twas/archive/master.zip -O fusion.zip</code><br>
 <code>unzip fusion.zip</code></p>
+<p>Create conda environments using the yml files provided<br>
+<code>conda env create --file fusion_final_environment.yml</code></p>
+<p>Set up FOCUS<br> <code>conda create -n focus python=3.7 r-base</code>
+<br> <code>conda activate focus</code> <br>
+<code>pip install pyfocus --user</code> <br>
+<code>pip install mygene --user</code> <br>
+<code>pip install rpy2 --user</code> <br></p>
 </div>
-<div id="create-conda-environment-using-the-yml-file-provided" class="section level4">
-<h4>Create conda environment using the yml file provided</h4>
-<p><code>conda env create --file fusion_final_environment.yml</code></p>
-</div>
-<div id="for-kcls-hpc-create-you-have-to-create-shortcuts-for-plink2r-libraries-otherwise-installation-in-r-next-wont-succeed-see-httpsgithub.comgusevlabfusion_twasissues13issuecomment-1202150944" class="section level4">
-<h4>For KCL’s HPC CREATE, you have to create shortcuts for plink2r
-libraries (otherwise installation in R next won’t succeed) # see <a href="https://github.com/gusevlab/fusion_twas/issues/13#issuecomment-1202150944" class="uri">https://github.com/gusevlab/fusion_twas/issues/13#issuecomment-1202150944</a></h4>
-<p><code>cd ~/scratch/miniconda3/envs/fusion_final/lib</code><br>
-<code>mv liblapack.so libRlapack.so</code><br>
-<code>mv libblas.so libRblas.so</code></p>
-</div>
-</div>
-<div id="download-snp-weights-for-focusfusion-and-the-1000-genomes-reference-panel" class="section level2">
+<div id="download-snp-weights-for-focusfusion-and-the-1000-genomes-reference-panel-and-decompress-files" class="section level2">
 <h2><b>2) Download SNP weights for FOCUS/FUSION and the 1000 Genomes
-reference panel</b></h2>
-<p><code>wget ________________</code><br>
-<code>wget ________________</code><br>
-<code>wget ________________</code><br> N.B.: Reference panel corresponds
-to the European subset of the 1,000 Genomes project annotated with
-dbsnp151/hg19.</p>
+reference panel, and decompress files</b></h2>
+<p><code>wget ________________</code> # awaiting DOI from FigShare. <br>
+<code>tar zxvf FOCUS_weights.tgz</code><br>
+<code>tar zxvf FUSION_weights.tgz</code><br>
+<code>tar zxvf 1000G_ref_panel.tgz</code><br> N.B.: Reference panel
+corresponds to the European subset of the 1,000 Genomes project
+annotated with dbsnp151/hg19.</p>
 </div>
 <div id="preprocessing-gwas-summary-statistics" class="section level2">
 <h2><b>3) Preprocessing GWAS summary statistics</b></h2>
@@ -410,18 +405,48 @@ rs10000013      C       A       -2.04</code></pre>
 4       rs10000010      21618674        T       C       -0.082  58749.13
 4       rs10000013      37225069        C       A       -2.04   58749.13</code></pre>
 </div>
-<div id="before-running-fusion-switch-on-the-conda-environment-and-proceed-with-the-fusion-analysis-as-recommended-by-the-authors" class="section level2">
-<h2><b>4) Before running FUSION, switch on the conda environment, and
-proceed with the <a href="http://gusevlab.org/projects/fusion/">FUSION
-analysis</a> as recommended by the authors</b></h2>
-<p><code>conda activate fusion_final</code> <br> E.g.,:</p>
-<pre><code>Rscript FUSION.assoc_test.R \
---sumstats PGC2.SCZ.sumstats \
---weights ./WEIGHTS/GTEx.Whole_Blood.pos \
---weights_dir ./WEIGHTS/ \
---ref_ld_chr ./LDREF/1000G.EUR. \
---chr 22 \
---out PGC2.SCZ.22.dat</code></pre>
+<div id="running-fusion" class="section level2">
+<h2><b>4) Running <a href="http://gusevlab.org/projects/fusion/">FUSION</a></b></h2>
+<p>To run FUSION, activate the conda environment, and use the FUSION
+weights and linkage disequilibrium reference panel provided. <br>
+<code>conda activate fusion_final</code><br> <br>
+<code>Rscript FUSION.assoc_test.R \</code><br>
+<code>--sumstats PGC2.SCZ.sumstats.fusion \</code><br>
+<code>--weights ./wrapped/CMC.pos \</code><br>
+<code>--weights_dir ./wrapped/ \</code><br>
+<code>--ref_ld_chr ./LDREF_harmonized/1000G.EUR. \</code><br>
+<code>--chr 22 \</code><br> <code>--out PGC2.SCZ.22.dat</code> <br> <br>
+To run the conditional analysis, you can follow the instructions as
+provided by the authors of FUSION. For example, first, you have to
+obtain a file containing only Bonferroni significant hits, and then you
+can perform the conditional analysis. <br> <br> Combine all files from
+all chromosomes <br>
+<code>head -1  PGC2.SCZ.1.dat &gt; SCZ_____all_chr.tsv</code><br>
+<code>tail -n +2 -q PGC2.SCZ.* &gt;&gt; SCZ_____all_chr.tsv</code><br>
+<br> Create file with significant hits only (Bonferroni) <br>
+<code>bonferroni_p=&#39;bc -l &lt;&lt;&lt; &quot;scale=50; 0.05/8212&quot;&#39;</code> #
+8212 is the number of expressed features in the weights<br>
+<code>cat SCZ_____all_chr.tsv | awk -v var=&quot;${bonferroni_p}&quot; &#39;NR == 1 || $20 &lt; var&#39; &gt; SCZ_____all_chr.tsv.Sig</code><br>
+<br> <code>Rscript FUSION.post_process.R \</code><br>
+<code>--sumstats PGC2.SCZ.sumstats.fusion \</code><br>
+<code>--input SCZ_____all_chr.tsv.Sig \</code><br>
+<code>--out SCZ_____all_chr.tsv.Sig.analysis \</code><br>
+<code>--ref_ld_chr ./LDREF_harmonized/1000G.EUR. \</code><br>
+<code>--chr 22 \</code><br>
+<code>--plot --locus_win 100000</code><br></p>
+</div>
+<div id="running-focus" class="section level2">
+<h2><b>5) Running <a href="https://github.com/bogdanlab/focus">FOCUS</a></b></h2>
+<p>To run FOCUS, activate the conda environment, and use the FUSION
+weights and linkage disequilibrium reference panel provided. <br>
+<code>conda activate focus</code> <br>
+<code>module load mesa-glu/9.0.1-gcc-9.4.0</code> # this is for CREATE
+users - loads libGL.so.1<br> <br>
+<code>focus finemap schizophrenia.gwas.focus \</code><br>
+<code>LDREF_harmonized/1000G.EUR.22 CMC_brain_focus_database.db \</code><br>
+<code>--chr 22 --plot --p-threshold 5E-08 \</code><br>
+<code>--out SCZ_pgc3_CMC.5e-8.chr.22 --locations 37:EUR</code><br> <br>
+<br> <br> #### Contact: Rodrigo Duarte (<a href="mailto:rodrigo.duarte@kcl.ac.uk" class="email">rodrigo.duarte@kcl.ac.uk</a>)</p>
 </div>
 
 

@@ -5,9 +5,7 @@ date: "2023-02-26"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
+
 
 ## <b>1) Set up FUSION and FOCUS</b>
 Set up the FUSION program folder <br>
