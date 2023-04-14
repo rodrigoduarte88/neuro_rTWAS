@@ -9,14 +9,17 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## <b>1) Set up FUSION and FOCUS</b>
-Set up the FUSION program folder <br>
+## <b>1) Set up a conda environment to run FUSION and FOCUS. </b>
+Installation time: approximately 5-10 min, depending on your machine configuration. <br>
+Set up the FUSION program folder: <br>
 `cd ~/scratch/programs/`<br>
 `wget https://github.com/gusevlab/fusion_twas/archive/master.zip -O fusion.zip`<br>
 `unzip fusion.zip`
 
-Create conda environments using the yml files provided<br>
-`conda env create --file fusion_final_environment.yml`
+The following assumes that you already have conda installed. For more information on conda, see https://docs.conda.io/en/latest/miniconda.html <br>
+To create the conda environment for fusion and focus, please using the yml files provided - see https://github.com/rodrigoduarte88/neuro_rTWAS/blob/main/fusion_final_environment.yml <br>
+`conda env create --file fusion_final_environment.yml` <br>
+This yml file contains all exact software and library versions required to run focus/fusion.
 
 Set up FOCUS<br>
 `conda create -n focus python=3.7 r-base` <br>
@@ -29,7 +32,7 @@ Set up FOCUS<br>
 ## <b>2) Download the required files and decompress</b>
 These include the SNP weights for FOCUS/FUSION and the 1000 Genomes reference panel.
 <br>
-`wget ________________` # awaiting DOI from FigShare. <br> 
+`wget ________________` # awaiting DOI from FigShare. If you are at this page, you should already have access to a private link containing all code and rTWAS weights, which you can decompress and move on to the following steps.<br> 
 `tar zxvf FOCUS_weights.tgz`<br>
 `tar zxvf FUSION_weights.tgz`<br>
 `tar zxvf 1000G_ref_panel.tgz`<br>
@@ -105,7 +108,7 @@ To run FOCUS, activate the conda environment, and use the FUSION weights and lin
 <br>
 <br>
 
-For interpretation of the output files, please use the instructions provided by the authors of [FOCUS](https://github.com/bogdanlab/focus) and [FUSION](http://gusevlab.org/projects/fusion/).
+For interpretation of the output files, please use the instructions provided by the authors of [FOCUS](https://github.com/bogdanlab/focus) and [FUSION](http://gusevlab.org/projects/fusion/). The results contain gene and HERV expression signatures associated with genetic susceptibility to your trait of interest.
 <br>
 <br>
 <br>

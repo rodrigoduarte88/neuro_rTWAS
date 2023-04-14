@@ -358,14 +358,20 @@ association study (rTWAS)</h1>
 </div>
 
 
-<div id="set-up-fusion-and-focus" class="section level2">
-<h2><b>1) Set up FUSION and FOCUS</b></h2>
-<p>Set up the FUSION program folder <br>
+<div id="set-up-a-conda-environment-to-run-fusion-and-focus." class="section level2">
+<h2><b>1) Set up a conda environment to run FUSION and FOCUS. </b></h2>
+<p>Installation time: approximately 5-10 min, depending on your machine
+configuration. <br> Set up the FUSION program folder: <br>
 <code>cd ~/scratch/programs/</code><br>
 <code>wget https://github.com/gusevlab/fusion_twas/archive/master.zip -O fusion.zip</code><br>
 <code>unzip fusion.zip</code></p>
-<p>Create conda environments using the yml files provided<br>
-<code>conda env create --file fusion_final_environment.yml</code></p>
+<p>The following assumes that you already have conda installed. For more
+information on conda, see <a href="https://docs.conda.io/en/latest/miniconda.html" class="uri">https://docs.conda.io/en/latest/miniconda.html</a> <br> To
+create the conda environment for fusion and focus, please using the yml
+files provided - see <a href="https://github.com/rodrigoduarte88/neuro_rTWAS/blob/main/fusion_final_environment.yml" class="uri">https://github.com/rodrigoduarte88/neuro_rTWAS/blob/main/fusion_final_environment.yml</a>
+<br> <code>conda env create --file fusion_final_environment.yml</code>
+<br> This yml file contains all exact software and library versions
+required to run focus/fusion.</p>
 <p>Set up FOCUS<br> <code>conda create -n focus python=3.7 r-base</code>
 <br> <code>conda activate focus</code> <br>
 <code>pip install pyfocus --user</code> <br>
@@ -376,7 +382,10 @@ association study (rTWAS)</h1>
 <h2><b>2) Download the required files and decompress</b></h2>
 <p>These include the SNP weights for FOCUS/FUSION and the 1000 Genomes
 reference panel. <br> <code>wget ________________</code> # awaiting DOI
-from FigShare. <br> <code>tar zxvf FOCUS_weights.tgz</code><br>
+from FigShare. If you are at this page, you should already have access
+to a private link containing all code and rTWAS weights, which you can
+decompress and move on to the following steps.<br>
+<code>tar zxvf FOCUS_weights.tgz</code><br>
 <code>tar zxvf FUSION_weights.tgz</code><br>
 <code>tar zxvf 1000G_ref_panel.tgz</code><br> <br> N.B.: Reference panel
 corresponds to the European subset of the 1,000 Genomes project
@@ -448,8 +457,9 @@ users - loads libGL.so.1<br> <br>
 <code>--out SCZ_pgc3_CMC.5e-8.chr.22 --locations 37:EUR</code><br> <br>
 <br> <br></p>
 <p>For interpretation of the output files, please use the instructions
-provided by the authors of <a href="https://github.com/bogdanlab/focus">FOCUS</a> and <a href="http://gusevlab.org/projects/fusion/">FUSION</a>. <br> <br>
-<br></p>
+provided by the authors of <a href="https://github.com/bogdanlab/focus">FOCUS</a> and <a href="http://gusevlab.org/projects/fusion/">FUSION</a>. The results
+contain gene and HERV expression signatures associated with genetic
+susceptibility to your trait of interest. <br> <br> <br></p>
 </div>
 
 
