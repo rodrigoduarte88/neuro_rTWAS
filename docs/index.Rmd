@@ -19,7 +19,16 @@ Set up the FUSION program folder: <br>
 The following assumes that you already have conda installed. For more information on conda, see https://docs.conda.io/en/latest/miniconda.html <br>
 To create the conda environment for fusion and focus, please using the yml files provided - see https://github.com/rodrigoduarte88/neuro_rTWAS/blob/main/fusion_final_environment.yml <br>
 `conda env create --file fusion_final_environment.yml` <br>
-This yml file contains all exact software and library versions required to run focus/fusion.
+This yml file contains most software and library versions required to run focus/fusion.<br>
+
+We still will need to install the R library "plink2R". To do this, rename libraries for plink2R in the conda environment folder (as detailed [here](https://stackoverflow.com/questions/64541476/cant-load-librlapack-so-librblas-so-under-conda)).<br>
+`cd /users/rodrigoduarte88/scratch/miniconda3/envs/fusion_final/lib`<br>
+`mv liblapack.so libRlapack.so`<br>
+`mv libblas.so libRblas.so`<br>
+<br>
+You will need to start R, and install manually plink2R using the following command: <br>
+`devtools::install_github("carbocation/plink2R/plink2R", ref="carbocation-permit-r361")` <br><br>
+
 
 Set up FOCUS<br>
 `conda create -n focus python=3.7 r-base` <br>

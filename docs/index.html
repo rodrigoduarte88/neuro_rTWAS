@@ -370,8 +370,17 @@ information on conda, see <a href="https://docs.conda.io/en/latest/miniconda.htm
 create the conda environment for fusion and focus, please using the yml
 files provided - see <a href="https://github.com/rodrigoduarte88/neuro_rTWAS/blob/main/fusion_final_environment.yml" class="uri">https://github.com/rodrigoduarte88/neuro_rTWAS/blob/main/fusion_final_environment.yml</a>
 <br> <code>conda env create --file fusion_final_environment.yml</code>
-<br> This yml file contains all exact software and library versions
-required to run focus/fusion.</p>
+<br> This yml file contains most software and library versions required
+to run focus/fusion.<br></p>
+<p>We still will need to install the R library “plink2R”. To do this,
+rename libraries for plink2R in the conda environment folder (as
+detailed <a href="https://stackoverflow.com/questions/64541476/cant-load-librlapack-so-librblas-so-under-conda">here</a>).<br>
+<code>cd /users/rodrigoduarte88/scratch/miniconda3/envs/fusion_final/lib</code><br>
+<code>mv liblapack.so libRlapack.so</code><br>
+<code>mv libblas.so libRblas.so</code><br> <br> You will need to start
+R, and install manually plink2R using the following command: <br>
+<code>devtools::install_github(&quot;carbocation/plink2R/plink2R&quot;, ref=&quot;carbocation-permit-r361&quot;)</code>
+<br><br></p>
 <p>Set up FOCUS<br> <code>conda create -n focus python=3.7 r-base</code>
 <br> <code>conda activate focus</code> <br>
 <code>pip install pyfocus --user</code> <br>
