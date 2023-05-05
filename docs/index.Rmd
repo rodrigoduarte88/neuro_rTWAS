@@ -27,10 +27,12 @@ We still will need to install the R library "plink2R". To do this, rename librar
 `mv libblas.so libRblas.so`<br>
 <br>
 You will need to start R, and install manually plink2R using the following command: <br>
+`conda activate fusion_final` <br>
+`R` <br>
 `devtools::install_github("carbocation/plink2R/plink2R", ref="carbocation-permit-r361")` <br><br>
 
 
-Set up FOCUS<br>
+Now, let's create the conda environment for FOCUS<br>
 `conda create -n focus python=3.7 r-base` <br>
 `conda activate focus` <br>
 `pip install pyfocus --user` <br>

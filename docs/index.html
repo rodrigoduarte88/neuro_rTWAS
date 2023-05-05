@@ -379,10 +379,12 @@ detailed <a href="https://stackoverflow.com/questions/64541476/cant-load-librlap
 <code>mv liblapack.so libRlapack.so</code><br>
 <code>mv libblas.so libRblas.so</code><br> <br> You will need to start
 R, and install manually plink2R using the following command: <br>
+<code>conda activate fusion_final</code> <br> <code>R</code> <br>
 <code>devtools::install_github(&quot;carbocation/plink2R/plink2R&quot;, ref=&quot;carbocation-permit-r361&quot;)</code>
 <br><br></p>
-<p>Set up FOCUS<br> <code>conda create -n focus python=3.7 r-base</code>
-<br> <code>conda activate focus</code> <br>
+<p>Now, let’s create the conda environment for FOCUS<br>
+<code>conda create -n focus python=3.7 r-base</code> <br>
+<code>conda activate focus</code> <br>
 <code>pip install pyfocus --user</code> <br>
 <code>pip install mygene --user</code> <br>
 <code>pip install rpy2 --user</code> <br></p>
