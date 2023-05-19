@@ -107,7 +107,7 @@ Create file with significant hits only (Bonferroni) <br>
 `--plot --locus_win 100000`<br>
 
 ## <b>5) Running [FOCUS](https://github.com/bogdanlab/focus)</b>
-To run FOCUS, activate the conda environment, and use the FUSION weights and linkage disequilibrium reference panel provided. <br>
+To run FOCUS, activate the conda environment, and use the FOCUS weights and linkage disequilibrium reference panel provided. <br>
 `conda activate focus` <br>
 `module load mesa-glu/9.0.1-gcc-9.4.0` # this is for CREATE users - loads libGL.so.1<br>
 <br>
