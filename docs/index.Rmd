@@ -1,7 +1,7 @@
 ---
 title: "Running a retrotranscriptome-wide association study (rTWAS)"
 author: "by Rodrigo R. R. Duarte (rodrigo.duarte@kcl.ac.uk)"
-date: "2023-02-26"
+date: "2024-04-01"
 output: html_document
 ---
 
@@ -41,9 +41,7 @@ Now, let's create the conda environment for FOCUS<br>
 
 
 ## <b>2) Download the required files and decompress</b>
-These include the SNP weights for FOCUS/FUSION and the 1000 Genomes reference panel.
-<br>
-`wget ________________` # awaiting DOI from FigShare. If you are at this page, you should already have access to a private link containing all code and rTWAS weights, which you can decompress and move on to the following steps.<br> 
+These include the SNP weights for FOCUS/FUSION and the 1000 Genomes reference panel for the population of interest. Please download the required files from the King's College London Research Data Repository (KORDS), at https://doi.org/10.18742/22179655. Then decompress files.<br>
 `tar zxvf FOCUS_weights.tgz`<br>
 `tar zxvf FUSION_weights.tgz`<br>
 `tar zxvf 1000G_ref_panel.tgz`<br>
