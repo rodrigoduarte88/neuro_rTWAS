@@ -46,7 +46,7 @@ These include the SNP weights for FOCUS/FUSION and the 1000 Genomes reference pa
 `tar zxvf FUSION_weights.tgz`<br>
 `tar zxvf 1000G_ref_panel.tgz`<br>
 <br>
-N.B.: Reference panel corresponds to the European subset of the 1,000 Genomes project annotated with dbsnp151/hg19.
+N.B.: The reference panels are annotated with dbsnp151/hg19 information.
 
 ## <b>3) Preprocessing GWAS summary statistics</b>
 Your GWAS summary statistics must be annotated with variant IDs according to dbsnp151. Use munge_sumstats.py from the [ldsc](https://github.com/bulik/ldsc) package for pre-filtering. You can find an example of how this was done on the scripts available from https://github.com/rodrigoduarte88/TWAS_HERVs-SCZ. You can also check the [FUSION guidelines](http://gusevlab.org/projects/fusion/) for additional instructions.
